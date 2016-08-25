@@ -8,7 +8,7 @@ var fs = require('fs');
 var Promise = require('bluebird');
 var semver = require('semver');
 var optimist = require('optimist');
-var generator = require('loopback-sdk-angular');
+var generator = require('loopback-sdk-ng');
 
 var argv = optimist
   .usage(g.f(
@@ -31,7 +31,7 @@ g.error('Loading {{LoopBack}} app %j', appFile);
 var app = require(appFile);
 assertLoopBackVersion();
 
-console.error('Applying LoopBack modelConfig %j', modelConfigFile);
+g.error('Applying LoopBack modelConfig %j', modelConfigFile);
 var modelConfigs = require(modelConfigFile);
 
 Object.keys(modelConfigs).forEach(function(k) {
