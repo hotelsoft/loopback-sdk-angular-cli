@@ -24,11 +24,22 @@ var argv = optimist
   .argv;
 
 var appFile = path.resolve(argv._[0]);
-var outputFile = argv._[1];
+var modelConfigFile = path.resolve(argv._[1]);
+var outputFile = argv._[2];
 
 g.error('Loading {{LoopBack}} app %j', appFile);
 var app = require(appFile);
 assertLoopBackVersion();
+
+console.error('Applying LoopBack modelConfig %j', modelConfigFile);
+var modelConfigs = require(modelConfigFile);
+
+Object.keys(modelConfigs).forEach(function(k) {
+  if(app.models[k]) {
+    app.models[k].settings = app.models[k].settings || {};
+    app.models[k].settings.modelConfigs = modelConfigs[k] || {};
+  }
+});
 
 if (app.booting) {
   app.on('booted', runGenerator);

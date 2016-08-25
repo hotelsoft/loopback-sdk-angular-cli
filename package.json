@@ -1,5 +1,5 @@
 {
-  "name": "loopback-sdk-angular-cli",
+  "name": "loopback-sdk-ng-cli",
   "version": "2.0.1",
   "description": "CLI tools for auto-generating Angular $resource services for LoopBack",
   "bin": {
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/strongloop/loopback-sdk-angular-cli.git"
+    "url": "git://github.com/hotelsoft/loopback-sdk-ng-cli.git"
   },
   "keywords": [
     "loopback",
@@ -19,20 +19,20 @@
     "cli"
   ],
   "author": {
-    "name": "StrongLoop, Inc.",
+    "name": "hotelsoft, Inc.",
     "email": "callback@strongloop.com",
-    "url": "http://strongloop.com/"
+    "url": "http://hotelsoft.com/"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/strongloop/loopback-sdk-angular-cli/issues"
+    "url": "https://github.com/hotelsoft/loopback-sdk-ng-cli/issues"
   },
   "engines": {
     "node": ">= 0.8.0"
   },
   "dependencies": {
     "bluebird": "^1.2.4",
-    "loopback-sdk-angular": "^1.1.1",
+    "loopback-sdk-angular": "hotelsoft/loopback-sdk-ng",
     "optimist": "^0.6.1",
     "semver": "^2.2.1",
     "strong-globalize": "^2.6.0"
