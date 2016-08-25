@@ -58,24 +58,24 @@ function runGenerator() {
     outputFile = path.resolve(outputFile);
     g.error('Saving the generated services source to %j', outputFile);
     fs.writeFileSync(outputFile, result);
+    process.exit();
   } else {
     g.error('Dumping to {{stdout}}');
     process.stdout.write(result);
+    // The app.js scaffolded by `slc lb project` loads strong-agent module that
+    // used to have a bug where it prevented the application from exiting.
+    // To work around that issue, we are explicitly exiting here.
+    //
+    // The exit is deferred to both stdout and err is drained
+    // in order to prevent the Node bug:
+    // https://github.com/joyent/node/issues/3584
+    Promise.all([
+      waitForEvent(process.stdout, 'drain'),
+      waitForEvent(process.stderr, 'drain')
+    ]).then(function() {
+      process.exit();
+    });
   }
-
-  // The app.js scaffolded by `slc lb project` loads strong-agent module that
-  // used to have a bug where it prevented the application from exiting.
-  // To work around that issue, we are explicitly exiting here.
-  //
-  // The exit is deferred to both stdout and err is drained
-  // in order to prevent the Node bug:
-  // https://github.com/joyent/node/issues/3584
-  Promise.all([
-    waitForEvent(process.stdout, 'drain'),
-    waitForEvent(process.stderr, 'drain')
-  ]).then(function() {
-    process.exit();
-  });
 }
 
 //--- helpers ---//
